@@ -1,0 +1,19 @@
+{
+  "name": "punchout2go/hyva-compat",
+  "description": "Hyv\u00e4 compatibility layer for TradeCentric/Punchout2Go (REST transfer + postForm + debug + API key + de-escape + base64 params)",
+  "type": "magento2-module",
+  "version": "1.4.4",
+  "license": "proprietary",
+  "require": {
+    "magento/framework": "*",
+    "hyva-themes/magento2-theme-frontend-hyva": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Punchout2Go\\\\HyvaCompat\\\\": ""
+    }
+  }
+}

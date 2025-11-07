@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<!-- Remove the default checkout button block -->
+        <referenceBlock name="checkout.cart.methods" remove="true"/>
+
+		<!-- Transfer Cart button  -->
+		<referenceContainer name="cart.summary">
+		  <block class="Punchout2Go\HyvaCompat\Block\Config" name="punchout.transfer" template="Punchout2Go_HyvaCompat::transfer.phtml" after="-" /> 
+		</referenceContainer>
+    </body>
+</page>

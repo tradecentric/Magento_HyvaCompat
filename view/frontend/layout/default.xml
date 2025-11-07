@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+  <body>
+    <referenceContainer name="before.body.end">
+      <block class="Punchout2Go\HyvaCompat\Block\Config"
+             name="punchout.session"
+             template="Punchout2Go_HyvaCompat::session.phtml"/>
+    </referenceContainer>
+
+    <referenceContainer name="header.panel">
+      <block class="Punchout2Go\HyvaCompat\Block\Config"
+             name="punchout.close"
+             template="Punchout2Go_HyvaCompat::close.phtml" />
+    </referenceContainer>
+  </body>
+</page>

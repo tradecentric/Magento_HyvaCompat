@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+  <system>
+    <section id="punchout2go_punchout" translate="label">
+      <group id="hyvacompat" translate="label" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Hyvä Compatibility</label>
+        <field id="rest_store_code" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>REST Store Code Override</label>
+          <comment>Optional. If set, REST calls will use /rest/&lt;code&gt;/V1/...</comment>
+        </field>
+        <field id="api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+          <label>API Key (override)</label>
+          <comment>If left empty, the value will be read from punchout2go_punchout/general/api_key.</comment>
+        </field>
+      </group>
+    </section>
+  </system>
+</config>

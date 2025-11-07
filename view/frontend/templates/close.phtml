@@ -1,0 +1,8 @@
+<?php /** @var \Punchout2Go\HyvaCompat\Block\Config $block */ ?>
+<div class="punchout-close-button" x-data>
+  <button type="button"
+          x-on:click="window.location.href='<?= $block->escapeUrl($block->getUrl('punchout/session/close')) ?>'"
+          class="btn btn-secondary text-sm rounded px-3 py-1 mt-2">
+    Close Punchout Session
+  </button>
+</div>

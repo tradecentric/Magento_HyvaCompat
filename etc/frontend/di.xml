@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <type name="Magento\Framework\View\Model\Layout\Merge">
+    <arguments>
+      <argument name="excludeLayoutFiles" xsi:type="array">
+        <item name="Punchout2Go_Punchout_default" xsi:type="string">layout/default.xml</item>
+        <item name="Punchout2Go_Punchout_checkout" xsi:type="string">layout/checkout_index_index.xml</item>
+      </argument>
+    </arguments>
+  </type>
+</config>

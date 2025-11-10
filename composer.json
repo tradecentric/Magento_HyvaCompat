@@ -10,7 +10,7 @@
   "require": {
     "php": "^8.0",
     "magento/framework": "*",
-      "tradecentric/module-punchout": "*",
+    "tradecentric/module-punchout": "*",
     "hyva-themes/magento2-theme-frontend-hyva": "*"
   },
   "autoload": {

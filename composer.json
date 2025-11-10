@@ -9,9 +9,7 @@
   ],
   "require": {
     "php": "^8.0",
-    "magento/framework": "*",
-    "tradecentric/module-punchout": "*",
-    "hyva-themes/magento2-theme-frontend-hyva": "*"
+    "tradecentric/module-punchout": "*"
   },
   "autoload": {
     "files": [

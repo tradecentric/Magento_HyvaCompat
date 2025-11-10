@@ -7,7 +7,8 @@ To install the latest version of the TradeCentric Hyva Compatibility extension, 
 <br>
 
 		"tradecentric/modulehyva-compatt": "^1.0",
-<br>
+
+
 ## Composer Installation
 TradeCentric uses [Composer](https://getcomposer.org/) to manage our Adobe Commerce modules and their dependencies, this assumes that you 
 already have Composer installed and a composer.json file exists in your Magento installation root directory. 

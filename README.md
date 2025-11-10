@@ -6,7 +6,7 @@ The TradeCentric Magento Hyva Compatibility extension is now available to allow 
 To install the latest version of the TradeCentric Hyva Compatibility extension, just add the following line to your composer.json file and run the standard composer/magento upgrade process.
 <br>
 
-		"tradecentric/modulehyva-compatt": "^1.0",
+		"tradecentric/modulehyva-compat": "^1.0",
 
 
 ## Composer Installation

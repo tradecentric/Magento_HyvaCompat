@@ -3,7 +3,7 @@
 The TradeCentric Magento Hyva Compatibility extension is now available to allow customers to Punchout to Magento suppliers using Hyva Theme with the Hyva Checkout (default).
 <br>
 
-To install the latest version of the TradeCentric Hyva Compatibility extension, just add the following line to your composer.json file and run the standard composer/mangent upgrade process.
+To install the latest version of the TradeCentric Hyva Compatibility extension, just add the following line to your composer.json file and run the standard composer/magento upgrade process.
 <br>
 
 		"tradecentric/modulehyva-compatt": "^1.0",

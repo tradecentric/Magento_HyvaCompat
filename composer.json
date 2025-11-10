@@ -3,10 +3,10 @@
   "description": "TradeCentric Hyva Compatibility",
   "type": "magento2-module",
   "version": "1.4.4",
-    "license": [
-        "OSL-3.0",
-        "AFL-3.0"
-    ],
+  "license": [
+	"OSL-3.0",
+  	"AFL-3.0"
+  ],
   "require": {
 	"php": "^8.0",
     "magento/framework": "*",

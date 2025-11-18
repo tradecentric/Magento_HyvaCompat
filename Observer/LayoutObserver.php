@@ -3,11 +3,15 @@ declare(strict_types=1);
 
 namespace Punchout2Go\HyvaCompat\Observer;
 
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\View\Model\Layout\Merge;
+
 /**
  * Class LayoutObserver
  * @package Punchout2Go\Punchout\Observer
  */
-class LayoutObserver extends \Punchout2Go\Punchout\Observer\LayoutObserver
+class LayoutObserver extends \Punchout2Go\Punchout\Observer\LayoutObserver implements ObserverInterface
 {
     /**
      * @param Observer $observer

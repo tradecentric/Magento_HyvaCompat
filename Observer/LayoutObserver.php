@@ -7,7 +7,7 @@ namespace Punchout2Go\HyvaCompat\Observer;
  * Class LayoutObserver
  * @package Punchout2Go\Punchout\Observer
  */
-class LayoutObserver extends Punchout2Go/Punchout/Observer/LayoutObserver
+class LayoutObserver extends \Punchout2Go\Punchout\Observer\LayoutObserver
 {
     /**
      * @param Observer $observer

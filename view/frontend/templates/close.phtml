@@ -1,7 +1,8 @@
 <?php /** @var \Punchout2Go\HyvaCompat\Block\Config $block */ ?>
 <?php /** @var \Punchout2Go\Punchout\Helper\Data $helper */ ?>
 <?php $helper = $this->helper(\Punchout2Go\Punchout\Helper\Data::class); ?>
-
+<?php echo 'isPunchoutActive: ' . $helper->isPunchoutActive(); ?>
+<?php echo 'isSessionValidate: ' . $helper->isSessionValidate(); ?>
 <?php if ($helper->isReturnEnabled() && $helper->isPunchoutActive()): ?>
 	<div class="punchout-close-button" x-data>
 	  <button type="button"

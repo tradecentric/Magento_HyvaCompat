@@ -22,7 +22,7 @@ class LayoutObserver extends \Punchout2Go\Punchout\Observer\LayoutObserver imple
         $layoutUpdate = $observer->getLayout()->getUpdate();
         $isActive = $this->helper->isPunchoutActive();
         if ($isActive && $this->session->isValid()) {
-            $layoutUpdate->addHandle('punchout');
+ //           $layoutUpdate->addHandle('punchout');
         }
 
         if ($isActive && $this->session->isValid()) {

@@ -7,15 +7,36 @@ use Magento\Framework\Event\Observer;
 
 class LayoutObserverPlugin
 {
+	/**
+     * @var \Punchout2Go\Punchout\Helper\Data
+     */
+    protected $dataHelper;
+
+    /**
+     * @var \Punchout2Go\Punchout\Model\Session
+     */
+    protected $session;
+
+    /**
+     * RestrictCheckoutPlugin constructor.
+     * @param ResultFactory $resultFactory
+     * @param \Punchout2Go\Punchout\Helper\Data $dataHelper
+     * @param \Punchout2Go\Punchout\Model\Session $session
+     */
+    public function __construct(
+        \Punchout2Go\Punchout\Helper\Data $dataHelper,
+        \Punchout2Go\Punchout\Model\Session $session
+    ) {
+        $this->dataHelper = $dataHelper;
+        $this->session = $session;
+    }
+	
     public function afterExecute($subject, $result, Observer $observer)
     {
 		/** @var Merge $layoutUpdate */
-        $layoutUpdate = $observer->getLayout()->getUpdate();
-//        $isActive = $this->helper->isPunchoutActive();
-//        if ($isActive) {
+		if ($this->dataHelper->isPunchoutActive() && $this->session->isValid()) {
+			$layoutUpdate = $observer->getLayout()->getUpdate();
             $layoutUpdate->addHandle('punchout_close');
-//        }
-	echo 'test: ' . var_dump($observer);
+        }
         return $result;
     }
-}

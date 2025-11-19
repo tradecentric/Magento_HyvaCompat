@@ -1,11 +1,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-	<type name="Punchout2Go\Punchout\Observer\LayoutObserver">
-		<plugin name="punchout2go_hyvacompat_layout_plugin" type="Punchout2Go\HyvaCompat\Plugin\LayoutObserverPlugin" />
-	</type>
-	
     <virtualType name="Punchout2Go\HyvaCompat\Block\Forms\Config\Version" type="TradeCentric\Version\Block\Forms\Config\Version">
         <arguments>
             <argument name="helper" xsi:type="object">Punchout2Go\HyvaCompat\Helper\Module</argument>
         </arguments>
-    </virtualType>	
+    </virtualType>  
 </config>

@@ -15,7 +15,7 @@ class LayoutObserverPlugin
 //        if ($isActive) {
             $layoutUpdate->addHandle('punchout_close');
 //        }
-	echo 'test';
+	echo 'test: ' . var_dump($observer);
         return $result;
     }
 }

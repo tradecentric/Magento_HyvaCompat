@@ -40,3 +40,4 @@ class LayoutObserverPlugin
         }
         return $result;
     }
+}

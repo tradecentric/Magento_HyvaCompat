@@ -1,18 +1,31 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
   <system>
-    <section id="punchout2go_punchout" translate="label">
-      <group id="hyvacompat" translate="label" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Hyvä Compatibility</label>
-        <field id="rest_store_code" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-          <label>REST Store Code Override</label>
-          <comment>Optional. If set, REST calls will use /rest/&lt;code&gt;/V1/...</comment>
-        </field>
-        <field id="api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-          <label>API Key (override)</label>
-          <comment>If left empty, the value will be read from punchout2go_punchout/general/api_key.</comment>
-        </field>
-      </group>
-    </section>
+        <tab id="punchout2go" translate="label" sortOrder="1000">
+            <label>TradeCentric</label>
+        </tab>
+        <section id="Punchout2Go_HyvaCompat" translate="label" type="text" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            <label>Hyva Compatibility</label>
+            <tab>punchout2go</tab>
+            <resource>Punchout2Go_HyvaCompat::config_hyvacompat</resource>
+			<group id="hyvacompat" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Hyvä Compatibility</label>
+				<field id="rest_store_code" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				  <label>REST Store Code Override</label>
+				  <comment>Optional. If set, REST calls will use /rest/&lt;code&gt;/V1/...</comment>
+				</field>
+				<field id="api_key" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				  <label>API Key (override)</label>
+					<comment>If left empty, the value will be read from punchout2go_punchout/general/api_key.</comment>
+				</field>
+			</group>
+            <group id="current_version" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Version</label>
+                <field id="version" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Current Version</label>
+                    <frontend_model>Punchout2Go\HyvaCompat\Block\Forms\Config\Version</frontend_model>
+                </field>
+            </group>        
+		</section>
   </system>
 </config>

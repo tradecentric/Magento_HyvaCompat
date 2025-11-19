@@ -6,7 +6,7 @@ namespace Punchout2Go\HyvaCompat\Plugin;
 use Magento\Framework\Event\Observer;
 
 class LayoutObserverPlugin
-
+{
     public function afterExecute($subject, $result, Observer $observer)
     {
 		/** @var Merge $layoutUpdate */

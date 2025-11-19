@@ -7,7 +7,7 @@ use Magento\Framework\Event\Observer;
 
 class LayoutObserverPlugin
 {
-	/**
+    /**
      * @var \Punchout2Go\Punchout\Helper\Data
      */
     protected $dataHelper;
@@ -30,12 +30,12 @@ class LayoutObserverPlugin
         $this->dataHelper = $dataHelper;
         $this->session = $session;
     }
-	
+    
     public function afterExecute($subject, $result, Observer $observer)
     {
-		/** @var Merge $layoutUpdate */
-		if ($this->dataHelper->isPunchoutActive() && $this->session->isValid()) {
-			$layoutUpdate = $observer->getLayout()->getUpdate();
+        /** @var Merge $layoutUpdate */
+        if ($this->dataHelper->isPunchoutActive() && $this->session->isValid()) {
+            $layoutUpdate = $observer->getLayout()->getUpdate();
             $layoutUpdate->addHandle('punchout_close');
         }
         return $result;

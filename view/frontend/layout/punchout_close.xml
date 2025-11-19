@@ -1,15 +1,11 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
   <body>
-<!--	<referenceBlock name="punchout-close" remove="true" />
-	<referenceBlock name="punchout.session" remove="true" />
-	<referenceBlock name="punchout.session.js" remove="true" />  -->
-	
     <referenceContainer name="header.panel">
       <block class="Magento\Framework\View\Element\Template" name="punchout-close" template="Punchout2Go_HyvaCompat::close.phtml" after="-"/>  
     </referenceContainer>
     
-	<referenceContainer name="before.body.end">
+    <referenceContainer name="before.body.end">
       <block class="Magento\Framework\View\Element\Template" name="punchout.session" template="Punchout2Go_HyvaCompat::session.phtml"/>
     </referenceContainer>
   </body>

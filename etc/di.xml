@@ -14,7 +14,7 @@
     <type name="Punchout2Go\Punchout\Model\Transfer\QuoteDataPool">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="purchase_order" xsi:type="object">Punchout2Go\HyvaCOmpat\Model\Transfer\QuoteDataHandlers\Version</item>
+                <item name="purchase_order" xsi:type="object">Punchout2Go\HyvaCompat\Model\Transfer\QuoteDataHandlers\Version</item>
             </argument>
         </arguments>
     </type>

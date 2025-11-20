@@ -1,13 +1,12 @@
 <?php /** @var \Punchout2Go\HyvaCompat\Block\Config $block */ ?>
 <?php /** @var \Punchout2Go\Punchout\Helper\Data $helper */ ?>
 <?php $helper = $this->helper(\Punchout2Go\Punchout\Helper\Data::class); ?>
-
 <?php if ($helper->isReturnEnabled()): ?>
-	<div class="punchout-close-button" x-data>
-	  <button type="button"
-		  x-on:click="window.location.href='<?= $block->escapeUrl($block->getUrl('punchout/session/close')) ?>'"
-		  class="btn btn-secondary text-sm rounded px-3 py-1 mt-2">
-		  <?php echo $escaper->escapeHtml($helper->getReturnLinkLabel()); ?>
-	  </button>
-	</div>
+    <div class="punchout-close-button" x-data>
+      <button type="button"
+          x-on:click="window.location.href='<?= $block->escapeUrl($block->getUrl('punchout/session/close')) ?>'"
+          class="btn btn-secondary text-sm rounded px-3 py-1 mt-2">
+          <?php echo $escaper->escapeHtml($helper->getReturnLinkLabel()); ?>
+      </button>
+    </div>
 <?php endif; ?>

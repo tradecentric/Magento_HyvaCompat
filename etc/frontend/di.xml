@@ -3,7 +3,7 @@
   <type name="Magento\Framework\View\Model\Layout\Merge">
     <arguments>
       <argument name="excludeLayoutFiles" xsi:type="array">
-        <item name="Punchout2Go_Punchout_default" xsi:type="string">layout/default.xml</item>
+        <item name="Punchout2Go_Punchout_close" xsi:type="string">layout/punchout_close.xml</item>
         <item name="Punchout2Go_Punchout_checkout" xsi:type="string">layout/checkout_index_index.xml</item>
       </argument>
     </arguments>

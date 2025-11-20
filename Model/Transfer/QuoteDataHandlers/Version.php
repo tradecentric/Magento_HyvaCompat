@@ -8,7 +8,7 @@ use TradeCentric\Version\Api\ModuleHelperInterface;
 
 /**
  * Class Version
- * @package TradeCentric\HyvaCompat\Model\Transfer\QuoteDataHandlers
+ * @package Punchout2Go\HyvaCompat\Model\Transfer\QuoteDataHandlers
  */
 class Version implements QuoteDataHandlerInterface
 {

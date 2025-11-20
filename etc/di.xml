@@ -9,8 +9,7 @@
         <arguments>
             <argument name="helper" xsi:type="object">Punchout2Go\HyvaCompat\Helper\Module</argument>
         </arguments>
-    </type>	
-	
+    </type>
     <type name="Punchout2Go\Punchout\Model\Transfer\QuoteDataPool">
         <arguments>
             <argument name="handlers" xsi:type="array">

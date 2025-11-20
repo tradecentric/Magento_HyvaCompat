@@ -18,8 +18,7 @@ class LayoutObserverPlugin
     protected $session;
 
     /**
-     * RestrictCheckoutPlugin constructor.
-     * @param ResultFactory $resultFactory
+     * LayoutObserverPlugin constructor.
      * @param \Punchout2Go\Punchout\Helper\Data $dataHelper
      * @param \Punchout2Go\Punchout\Model\Session $session
      */

@@ -27,7 +27,7 @@
                     <label>Current Version</label>
                     <frontend_model>Punchout2Go\HyvaCompat\Block\Forms\Config\Version</frontend_model>
                 </field>
-            </group>        
+            </group>
         </section>
   </system>
 </config>

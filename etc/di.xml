@@ -17,5 +17,9 @@
                 <item name="purchase_order" xsi:type="object">Punchout2Go\HyvaCOmpat\Model\Transfer\QuoteDataHandlers\Version</item>
             </argument>
         </arguments>
-    </type>	
+    </type>
+  
+    <type name="Punchout2Go\Punchout\Observer\LayoutObserver">
+        <plugin name="punchout2go_hyvacompat_layout_plugin" type="Punchout2Go\HyvaCompat\Plugin\LayoutObserverPlugin" />
+    </type>
 </config>

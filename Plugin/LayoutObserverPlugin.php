@@ -32,7 +32,7 @@ class LayoutObserverPlugin
     
     public function afterExecute($subject, $result, Observer $observer)
     {
-        /** @var Merge $layoutUpdate */
+        /** @var \Magento\Framework\View\Model\Layout\Merge $layoutUpdate */
         if ($this->dataHelper->isPunchoutActive() && $this->session->isValid()) {
             $layoutUpdate = $observer->getLayout()->getUpdate();
             $layoutUpdate->addHandle('punchout_close');

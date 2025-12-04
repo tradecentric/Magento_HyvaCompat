@@ -37,16 +37,6 @@ class Version implements QuoteDataHandlerInterface
      */
     public function handle(\Magento\Quote\Api\Data\CartInterface $cart): array
     {
-        $this->logger->log('Hyva_Compat Version');
-		$this->logger->log(print_r([
-            'custom_fields' => [
-                [
-                    'field' => 'hyva_compat_extension',
-                    'value' => $this->helper->getModuleVersion()
-                ]
-            ]
-        ], true));
-        
         return [
             'custom_fields' => [
                 [

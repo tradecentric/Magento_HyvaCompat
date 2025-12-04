@@ -25,7 +25,7 @@ class Version implements QuoteDataHandlerInterface
     /**
      * @param ModuleHelperInterface $helper
      */
-    public function __construct(ModuleHelperInterface $helper, \Punchout2Go\Punchout\Api\LoggerInterface $logger,)
+    public function __construct(ModuleHelperInterface $helper, \Punchout2Go\Punchout\Api\LoggerInterface $logger)
     {
         $this->helper = $helper;
         $this->logger = $logger;

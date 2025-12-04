@@ -37,7 +37,7 @@ class Version implements QuoteDataHandlerInterface
      */
     public function handle(\Magento\Quote\Api\Data\CartInterface $cart): array
     {
-        $logger-<log('Hyva_Compat Version');
+        $this->logger->log('Hyva_Compat Version');
         
         return [
             'custom_fields' => [

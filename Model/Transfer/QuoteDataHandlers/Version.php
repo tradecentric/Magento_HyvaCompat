@@ -18,17 +18,11 @@ class Version implements QuoteDataHandlerInterface
     protected $helper;
 
     /**
-     * @var \Punchout2Go\Punchout\Api\LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @param ModuleHelperInterface $helper
      */
-    public function __construct(ModuleHelperInterface $helper, \Punchout2Go\Punchout\Api\LoggerInterface $logger)
+    public function __construct(ModuleHelperInterface $helper)
     {
         $this->helper = $helper;
-        $this->logger = $logger;
     }
 
     /**
@@ -37,7 +31,6 @@ class Version implements QuoteDataHandlerInterface
      */
     public function handle(\Magento\Quote\Api\Data\CartInterface $cart): array
     {
-        $this->logger->log('Hyva_Compat Version');        
         return [
             'custom_fields' => [
                 [

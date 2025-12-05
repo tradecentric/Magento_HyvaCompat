@@ -72,7 +72,7 @@ const stripCustomFieldsEnvelope = (payload) => {
     if (Array.isArray(p.body.items)) {
         p.body.items = p.body.items.map(ensureObject).map(it => {
             if (it && typeof it === 'object' && 'custom_fields' in it) {
-//               const copy = { ...it }; delete copy.custom_fields; return copy;
+               const copy = { ...it }; delete copy.custom_fields; return copy;
             }
             return it;
         });

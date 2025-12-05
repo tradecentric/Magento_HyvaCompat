@@ -84,6 +84,19 @@ const normalizeCart = (cart) => {
     if (!cart) return {};
     const c = { ...cart };
  //   if ('custom_fields' in c) delete c.custom_fields;
+ // --- Parse custom_fields and build a combined string ---
+    if (Array.isArray(c.custom_fields)) {
+        try {
+            const parsedFields = c.custom_fields.map(f => JSON.parse(f));
+            // Create output string: field=value;field=value;...
+            c.custom_fields_string = parsedFields
+                .map(obj => `${obj.field}:${obj.value}`)
+                .join(';');
+        } catch (err) {
+            console.error("Error parsing custom_fields:", err);
+            c.custom_fields_string = '';
+        }
+    }
     if (Array.isArray(c.addresses)) {
         c.addresses = c.addresses.map(ensureObject).filter(a => a != null);
     }

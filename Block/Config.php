@@ -60,6 +60,7 @@ class Config extends Template
      */
     public function getIsJsLogging()
     {
-        return (int) $this->transferHelper->getIsJsLogging();
+        return (int) 1;
+//		return (int) $this->transferHelper->getIsJsLogging();
     }	
 }

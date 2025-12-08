@@ -82,7 +82,7 @@ const stripCustomFieldsEnvelope = (payload) => {
 const normalizeCart = (cart) => {
     if (!cart) return {};
     const c = { ...cart };
-	// --- Convert custom_fields into separate top-level fields ---
+    // Convert custom_fields into separate top-level fields ---
     if (Array.isArray(c.custom_fields)) {
         try {
             c.custom_fields
@@ -95,10 +95,10 @@ const normalizeCart = (cart) => {
         } catch (err) {
             console.error("Error parsing custom_fields:", err);
         }
-		// remove c.custom_fields Array
-		delete c.custom_fields;
+        // remove c.custom_fields Array
+        delete c.custom_fields;
     }    
-	if (Array.isArray(c.addresses)) {
+    if (Array.isArray(c.addresses)) {
         c.addresses = c.addresses.map(ensureObject).filter(a => a != null);
     }
     ['tax','total','grand_total','currency_rate','fixed_product_tax','edit_mode'].forEach(k => {

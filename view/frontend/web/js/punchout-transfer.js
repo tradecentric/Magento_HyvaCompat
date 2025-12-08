@@ -63,7 +63,6 @@ const peelParamsToObject = (p) => {
 const stripCustomFieldsEnvelope = (payload) => {
     const p = deepClone(payload || {});
     p.body = p.body || {};
-//    if ('custom_fields' in p.body) delete p.body.custom_fields;
     if (Array.isArray(p.items)) {
         p.body.items = p.body.items || [];
         if (!p.body.items.length) p.body.items = p.items;
@@ -112,7 +111,7 @@ const normalizeItems = (items) => {
     if (!Array.isArray(items)) return [];
     return items.map(ensureObject).map(it => {
         if (it && typeof it === 'object' && 'custom_fields' in it) {
- //           const copy = { ...it }; delete copy.custom_fields; return copy;
+            const copy = { ...it }; delete copy.custom_fields; return copy;
         }
         return it;
     });

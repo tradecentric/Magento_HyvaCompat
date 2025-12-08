@@ -2,8 +2,7 @@
 <?php $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class); ?>
 
 <?php if ($msg = $helper->getIsJsLogging()): ?>
-	<script type="module">
-	  alert('JS Logging - ' . $helper->getIsJsLogging());
+	<script type="text/x-magento-init">
 	  console.log('[Punchout2Go_HyvaCompat] Session & ' . echo $escaper->escapeHtml($msg));
 	</script>
 <?php endif; ?>
@@ -22,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.P2G_HYVA.restStoreCode = '<?= $block->escapeHtml($block->getRestStoreCode()) ?>';
     window.P2G_HYVA.closePostUrl = '<?= $block->escapeUrl($block->getClosePostUrl()) ?>';
     window.P2G_HYVA.apiKey = '<?= $block->escapeHtml($block->getApiKey()) ?>';
+	window.P2G_HYVA.debug = '<?= $block->escapeHtml($block->getIsDebug()) ?>';
+	window.P2G_HYVA.js_logging = '<?= $block->escapeHtml($block->getIsJsLogging()) ?>';
     window.__P2G_TRACE = [];
   }).catch(err => console.error('Punchout2Go_HyvaCompat load failed:', err));
 });

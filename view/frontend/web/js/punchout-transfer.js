@@ -63,7 +63,6 @@ const peelParamsToObject = (p) => {
 const stripCustomFieldsEnvelope = (payload) => {
     const p = deepClone(payload || {});
     p.body = p.body || {};
-    if ('custom_fields' in p.body) delete p.body.custom_fields;
     if (Array.isArray(p.items)) {
         p.body.items = p.body.items || [];
         if (!p.body.items.length) p.body.items = p.items;
@@ -72,7 +71,7 @@ const stripCustomFieldsEnvelope = (payload) => {
     if (Array.isArray(p.body.items)) {
         p.body.items = p.body.items.map(ensureObject).map(it => {
             if (it && typeof it === 'object' && 'custom_fields' in it) {
-                const copy = { ...it }; delete copy.custom_fields; return copy;
+               const copy = { ...it }; delete copy.custom_fields; return copy;
             }
             return it;
         });
@@ -83,7 +82,22 @@ const stripCustomFieldsEnvelope = (payload) => {
 const normalizeCart = (cart) => {
     if (!cart) return {};
     const c = { ...cart };
-    if ('custom_fields' in c) delete c.custom_fields;
+    // Convert custom_fields into separate top-level fields ---
+    if (Array.isArray(c.custom_fields)) {
+        try {
+            c.custom_fields
+                .map(f => JSON.parse(f)) // convert string → object
+                .forEach(obj => {
+                    if (obj.field && obj.value !== undefined) {
+                        c[obj.field] = obj.value; // add as top-level property
+                    }
+                });
+        } catch (err) {
+            console.error("Error parsing custom_fields:", err);
+        }
+        // remove c.custom_fields Array
+        delete c.custom_fields;
+    }
     if (Array.isArray(c.addresses)) {
         c.addresses = c.addresses.map(ensureObject).filter(a => a != null);
     }

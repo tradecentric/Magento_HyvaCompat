@@ -1,10 +1,10 @@
 <?php /** @var \Punchout2Go\HyvaCompat\Block\Config $block */ ?>
 <?php $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class); ?>
 
-<?php if ($help = $helper->getIsJsLogging()): ?>
+<?php if ($msg = $helper->getIsJsLogging()): ?>
 	<script type="module">
 	  alert('JS Logging - ' . $helper->getIsJsLogging());
-	  console.log('[Punchout2Go_HyvaCompat] Session & Transfer modules loaded.');
+	  console.log('[Punchout2Go_HyvaCompat] Session & ' . echo $escaper->escapeHtml($msg));
 	</script>
 <?php endif; ?>
   

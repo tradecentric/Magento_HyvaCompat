@@ -97,7 +97,7 @@ const normalizeCart = (cart) => {
         }
         // remove c.custom_fields Array
         delete c.custom_fields;
-    }    
+    }
     if (Array.isArray(c.addresses)) {
         c.addresses = c.addresses.map(ensureObject).filter(a => a != null);
     }

@@ -7,7 +7,7 @@
 
 		<!-- Transfer Cart button  -->
 		<referenceContainer name="cart.summary">
-		  <block class="Punchout2Go\HyvaCompat\Block\Config" name="punchout.transfer" template="Punchout2Go_HyvaCompat::transfer.phtml" after="-" /> 
+		  <block class="Punchout2Go\HyvaCompat\Block\Config" name="punchout.transfer" template="Punchout2Go_HyvaCompat::transfer.phtml" /> 
 		</referenceContainer>
     </body>
 </page>

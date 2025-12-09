@@ -46,21 +46,4 @@ class Config extends Template
     {
         return $this->getUrl('punchout/session/closePost');
     }
-	
-    /**
-     * @return int
-     */
-    public function getIsDebug()
-    {
-        return (int) $this->transferHelper->getIsDebug();
-    }
-
-    /**
-     * @return int
-     */
-    public function getIsJsLogging()
-    {
-        return (int) 1;
-//		return (int) $this->transferHelper->getIsJsLogging();
-    }	
 }

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-session.js") ?>'),
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-transfer.js") ?>')
   ]).then(() => {
-	console.log('[Punchout2Go_HyvaCompat] - ' );
+	console.log('[Punchout2Go_HyvaCompat] - js_logging' . <?php echo (int) $block->getIsJsLogging() ?>);
 	if ('1') {
 		console.log('[Punchout2Go_HyvaCompat] Session & Transfer modules loaded.');
 	}

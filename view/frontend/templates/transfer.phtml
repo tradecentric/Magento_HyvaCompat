@@ -14,6 +14,7 @@ $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class);
   
   <?php if ($help = $helper->getButtonHelp()): ?>
 	  <p class="mt-2 text-sm text-gray-500"><?php echo $escaper->escapeHtml($help) ?></p>
+	  <p class="mt-2 text-sm text-gray-500">JS Logging value: <?php echo $escaper->escapeHtml($helper->getJsLogging()) ?></p>
   <?php endif; ?>
 	
   <div class="text-xs mt-1 opacity-70" id="p2g-debug-hint"></div>

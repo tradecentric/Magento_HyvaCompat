@@ -136,7 +136,7 @@ const restBaseCandidates = () => {
 };
 
 const log = (string, data) => {
-	if (P2G_HYVA.isJsLogging) {
+	if (window.P2G_HYVA.isJsLogging) {
 		console.log(string, data);
 	}
 };

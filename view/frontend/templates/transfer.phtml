@@ -7,14 +7,14 @@ $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class);
 
 <div class="punchout-transfer-button" x-data>
   <button type="button"
-	  x-on:click="transferCart()"
-	  class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold">
-	  <span><?php echo $escaper->escapeHtml($helper->getButtonLabel()) ?></span>
+      x-on:click="transferCart()"
+      class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold">
+      <span><?php echo $escaper->escapeHtml($helper->getButtonLabel()) ?></span>
   </button>
   
   <?php if ($help = $helper->getButtonHelp()): ?>
-	  <p class="mt-2 text-sm text-gray-500"><?php echo $escaper->escapeHtml($help) ?></p>
+      <p class="mt-2 text-sm text-gray-500"><?php echo $escaper->escapeHtml($help) ?></p>
   <?php endif; ?>
-	
+    
   <div class="text-xs mt-1 opacity-70" id="p2g-debug-hint"></div>
 </div>

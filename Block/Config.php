@@ -12,20 +12,13 @@ class Config extends Template
     const XML_PATH_API_KEY_ORIGINAL = 'punchout2go_punchout/general/api_key';
 
     protected $scopeConfig;
-	
-	/**
-     * @var \Punchout2Go\Punchout\Helper\Transfer
-     */
-    protected $transferHelper;
 
     public function __construct(
         Template\Context $context,
         ScopeConfigInterface $scopeConfig,
-		\Punchout2Go\Punchout\Helper\Transfer $transferHelper,
         array $data = []
     ) {
         $this->scopeConfig = $scopeConfig;
-		$this->transferHelper = $transferHelper;
         parent::__construct($context, $data);
     }
 

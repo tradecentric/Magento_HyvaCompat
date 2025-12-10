@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-session.js") ?>'),
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-transfer.js") ?>')
   ]).then(() => {
-	let isLogger = <?= $helper->getIsJsLogging() ?>;
-	if (isLogger) {
-		console.log('[Punchout2Go_HyvaCompat] Session & Transfer modules loaded.');
-	}
+    let isLogger = <?= $helper->getIsJsLogging() ?>;
+    if (isLogger) {
+        console.log('[Punchout2Go_HyvaCompat] Session & Transfer modules loaded.');
+    }
     window.P2G_HYVA = window.P2G_HYVA || {};
     window.P2G_HYVA.restStoreCode = '<?= $block->escapeHtml($block->getRestStoreCode()) ?>';
     window.P2G_HYVA.closePostUrl = '<?= $block->escapeUrl($block->getClosePostUrl()) ?>';
     window.P2G_HYVA.apiKey = '<?= $block->escapeHtml($block->getApiKey()) ?>';
-	window.P2G_HYVA.debug = '<?= $helper->getIsDebug() ?>';
-	window.P2G_HYVA.js_logging = <?= $helper->getIsJsLogging() ?>;
+    window.P2G_HYVA.debug = '<?= $block->escapeHtml($helper->getIsDebug()) ?>';
+    window.P2G_HYVA.js_logging = <?= $block->escapeHtml($helper->getIsJsLogging()) ?>;
     window.__P2G_TRACE = [];
   }).catch(err => console.error('Punchout2Go_HyvaCompat load failed:', err));
 });

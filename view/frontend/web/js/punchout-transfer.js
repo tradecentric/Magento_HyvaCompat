@@ -16,6 +16,13 @@ const base64FromUtf8 = (str) => {
     let bin = ''; for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
     return btoa(bin);
 };
+
+const log = (string, data) => {
+    if (window.P2G_HYVA && window.P2G_HYVA.js_logging) {
+        console.log(string, data);
+    }
+};
+
 const isJsonText = (t) => {
     log('[Punchout2Go_HyvaCompat] isJsonText()');
     if (typeof t !== 'string') return false;
@@ -133,12 +140,6 @@ const restBaseCandidates = () => {
     if (storeCode) list.push(`/rest/${storeCode}/V1`);
     list.push('/rest/V1', '/rest/default/V1');
     return Array.from(new Set(list));
-};
-
-const log = (string, data) => {
-    if (window.P2G_HYVA && window.P2G_HYVA.js_logging) {
-        console.log(string, data);
-    }
 };
 
 async function getJsonOrXml(url) {

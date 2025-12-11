@@ -85,7 +85,7 @@ const stripCustomFieldsEnvelope = (payload) => {
 };
 
 const normalizeCart = (cart) => {
-    log('[Punchout2Go_HyvaCompat] normailzeCart()');
+    log('[Punchout2Go_HyvaCompat] normalizeCart()');
     if (!cart) return {};
     const c = { ...cart };
     // Convert custom_fields into separate top-level fields ---

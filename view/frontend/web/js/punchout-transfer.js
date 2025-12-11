@@ -16,12 +16,21 @@ const base64FromUtf8 = (str) => {
     let bin = ''; for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
     return btoa(bin);
 };
+
+const log = (string, data) => {
+    if (window.P2G_HYVA && window.P2G_HYVA.js_logging) {
+        console.log(string, data);
+    }
+};
+
 const isJsonText = (t) => {
+    log('[Punchout2Go_HyvaCompat] isJsonText()');
     if (typeof t !== 'string') return false;
     const x = t.trim();
     return (x.startsWith('{') && x.endsWith('}')) || (x.startsWith('[') && x.endsWith(']'));
 };
 const ensureObject = (val) => {
+    log('[Punchout2Go_HyvaCompat] ensureObject()');
     if (val == null) return val;
     if (typeof val === 'string') {
         const s = val.trim();
@@ -32,6 +41,7 @@ const ensureObject = (val) => {
 const deepClone = (o) => JSON.parse(JSON.stringify(o ?? {}));
 
 const wrapItemsUnderBody = (params) => {
+    log('[Punchout2Go_HyvaCompat] wrapItemsUnderBody()', params);
     const src = deepClone(params || {});
     const bodyIn = (src.body && typeof src.body === 'object') ? src.body : {};
     const rootItems = Array.isArray(src.items) ? src.items : [];
@@ -43,6 +53,7 @@ const wrapItemsUnderBody = (params) => {
 };
 
 const peelParamsToObject = (p) => {
+    log('[Punchout2Go_HyvaCompat] peelParamsToObject()');
     if (p && typeof p === 'object') return p;
     if (typeof p === 'string') {
         let s = p.trim();
@@ -61,6 +72,7 @@ const peelParamsToObject = (p) => {
 };
 
 const stripCustomFieldsEnvelope = (payload) => {
+    log('[Punchout2Go_HyvaCompat] stripCustomFieldsEnvelope()');
     const p = deepClone(payload || {});
     p.body = p.body || {};
     if (Array.isArray(p.items)) {
@@ -80,6 +92,7 @@ const stripCustomFieldsEnvelope = (payload) => {
 };
 
 const normalizeCart = (cart) => {
+    log('[Punchout2Go_HyvaCompat] normalizeCart()');
     if (!cart) return {};
     const c = { ...cart };
     // Convert custom_fields into separate top-level fields ---
@@ -108,6 +121,7 @@ const normalizeCart = (cart) => {
 };
 
 const normalizeItems = (items) => {
+    log('[Punchout2Go_HyvaCompat] normalizeItems()');
     if (!Array.isArray(items)) return [];
     return items.map(ensureObject).map(it => {
         if (it && typeof it === 'object' && 'custom_fields' in it) {
@@ -118,6 +132,7 @@ const normalizeItems = (items) => {
 };
 
 const restBaseCandidates = () => {
+    log('[Punchout2Go_HyvaCompat] restBaseCandidates()');
     const list = [];
     const cfgCode = (window.P2G_HYVA && window.P2G_HYVA.restStoreCode) || '';
     if (cfgCode) list.push(`/rest/${cfgCode}/V1`);
@@ -128,6 +143,7 @@ const restBaseCandidates = () => {
 };
 
 async function getJsonOrXml(url) {
+    log('[Punchout2Go_HyvaCompat] getJsonOrXml()', url);
     const resp = await fetch(url, {
         credentials: 'same-origin',
         headers: { 'Accept': 'application/json, text/xml;q=0.9, application/xml;q=0.9, */*;q=0.8' }
@@ -147,6 +163,7 @@ async function getJsonOrXml(url) {
 }
 
 const extractReturnUrl = (payload) => {
+    log('[Punchout2Go_HyvaCompat] extractReturnUrl()', payload);
     const { json, xml } = payload;
     if (json) {
         const paths = [
@@ -170,6 +187,7 @@ const extractReturnUrl = (payload) => {
 };
 
 const extractPostForm = (payload) => {
+    log('[Punchout2Go_HyvaCompat] extractPostForm()');
     const { json, xml } = payload;
     const sanitizeFieldsParams = (fields) => {
         if (!fields) return fields;
@@ -216,12 +234,14 @@ const extractPostForm = (payload) => {
 };
 
 const extractCartItemsFromJson = (json) => {
+    log('[Punchout2Go_HyvaCompat] extractCartItemsFromJson()');
     const cart = json.cart_data || json.cart || (json.data && (json.data.cart_data || json.data.cart));
     const items = json.items_data || json.items || (json.data && (json.data.items_data || json.data.items)) || [];
     return { cart: normalizeCart(cart || {}), items: normalizeItems(items || []) };
 };
 
 const extractCartItemsFromXml = (xml) => {
+    log('[Punchout2Go_HyvaCompat] extractCartItemsFromXml()');
     const cart = {}; const items = [];
     if (cart.addresses && Array.isArray(cart.addresses)) cart.addresses = cart.addresses.map(ensureObject);
     if (xml) {
@@ -247,6 +267,7 @@ const extractCartItemsFromXml = (xml) => {
 };
 
 const buildFormFromPayload = (payload) => {
+    log('[Punchout2Go_HyvaCompat] buildFormFromPayload()');
     const pf = extractPostForm(payload);
     if (pf) return pf;
     let cart = null, items = [];
@@ -273,6 +294,7 @@ const buildFormFromPayload = (payload) => {
 };
 
 function submitPostForm(url, fields) {
+    log('[Punchout2Go_HyvaCompat] submitPostForm()');
     if (Object.prototype.hasOwnProperty.call(fields, 'params')) {
         const p = fields.params;
         if (fields.__p2g_params_needs_encoding || (p && typeof p === 'object')) {
@@ -311,6 +333,7 @@ function submitPostForm(url, fields) {
 }
 
 async function closeSessionPost() {
+    log('[Punchout2Go_HyvaCompat] closeSessionPost()');
     const url = (window.P2G_HYVA && window.P2G_HYVA.closePostUrl) || '/punchout/session/closePost';
     const resp = await fetch(url, {
         method: 'POST',
@@ -321,6 +344,7 @@ async function closeSessionPost() {
 }
 
 export async function transferCart() {
+    log('[Punchout2Go_HyvaCompat] transferCart()');
     try {
         let punchoutId = window.P2G_HYVA && window.P2G_HYVA.punchoutId;
         if (!punchoutId) {

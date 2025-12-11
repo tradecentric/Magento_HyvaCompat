@@ -9,7 +9,6 @@ class Config extends Template
 {
     const XML_PATH_REST_STORE_CODE = 'punchout2go_punchout/hyvacompat/rest_store_code';
     const XML_PATH_API_KEY_OVERRIDE = 'punchout2go_punchout/hyvacompat/api_key';
-    // Best-guess of original module path
     const XML_PATH_API_KEY_ORIGINAL = 'punchout2go_punchout/general/api_key';
 
     protected $scopeConfig;

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-session.js") ?>'),
     import('<?= $block->getViewFileUrl("Punchout2Go_HyvaCompat::js/punchout-transfer.js") ?>')
   ]).then(() => {
-    let isLogger = '<?= $helper->getIsJsLogging() ?>';
+    let isLogger = <?= $helper->getIsJsLogging() ? 'true' : 'false' ?>;
     if (isLogger) {
         console.log('[Punchout2Go_HyvaCompat] Session & Transfer modules loaded.');
     }

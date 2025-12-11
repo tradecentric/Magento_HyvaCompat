@@ -332,7 +332,7 @@ function submitPostForm(url, fields) {
 }
 
 async function closeSessionPost() {
-    log('[Punchout2Go_HyvaCompat] CloseSessionPost()');
+    log('[Punchout2Go_HyvaCompat] closeSessionPost()');
     const url = (window.P2G_HYVA && window.P2G_HYVA.closePostUrl) || '/punchout/session/closePost';
     const resp = await fetch(url, {
         method: 'POST',

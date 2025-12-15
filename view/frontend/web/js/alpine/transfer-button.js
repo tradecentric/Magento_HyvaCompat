@@ -1,3 +1,6 @@
+import { transferCart } from '../punchout-transfer.js';
+import { openDebugModal } from './debug-modal.js'; 
+
 export function p2gTransferButton({ debug = false } = {}) {
     return {
         debug,
@@ -5,46 +8,25 @@ export function p2gTransferButton({ debug = false } = {}) {
         hint: debug ? 'Debug mode enabled' : '',
 
         async handleClick() {
-            if (this.loading) {
-                return;
-            }
-
-            // Debug mode → open modal
             if (this.debug) {
-                this.$dispatch('p2g-open-debug');
-                return;
-            }
-
-            // Normal transfer
-            await this.runTransfer();
-        },
-
-        async runTransfer() {
-            if (typeof window.transferCart !== 'function') {
-                this.notify('error', 'Transfer function is not available.');
+                // open debug modal if in debug mode
+                if (typeof openDebugModal === 'function') {
+                    openDebugModal();
+                } else {
+                    console.warn('Debug modal function not defined');
+                }
                 return;
             }
 
             this.loading = true;
-            this.hint = 'Transferring cart…';
 
             try {
-                await window.transferCart();
+                await transferCart();
             } catch (err) {
-                this.notify(
-                    'error',
-                    err?.message || 'Transfer failed'
-                );
+                console.error('Transfer failed', err);
             } finally {
                 this.loading = false;
-                this.hint = this.debug ? 'Debug mode enabled' : '';
             }
-        },
-
-        notify(type, message) {
-            window.dispatchEvent(new CustomEvent('p2g-notify', {
-                detail: { type, message }
-            }));
         }
-    };
+	};
 }

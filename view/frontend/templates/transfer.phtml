@@ -8,9 +8,7 @@ $isDebug = (bool) $helper->getIsDebug();
 
 <div
     class="punchout-transfer-button"
-    x-data="p2gTransferButton({
-        debug: <?= $isDebug ? 'true' : 'false' ?>
-    })"
+    x-data="p2gTransferButton({ debug: <?= $isDebug ? 'true' : 'false' ?> })"
 >
     <button
         type="button"
@@ -18,13 +16,7 @@ $isDebug = (bool) $helper->getIsDebug();
         :disabled="loading"
         @click.prevent="handleClick()"
     >
-        <span x-show="!loading">
-            <?= $escaper->escapeHtml($helper->getButtonLabel()) ?>
-        </span>
-
-        <span x-show="loading">
-            Transferring…
-        </span>
+        <span x-text="loading ? 'Transferring…' : '<?= $escaper->escapeHtml($helper->getButtonLabel()) ?>'"></span>
     </button>
 
     <?php if ($help = $helper->getButtonHelp()): ?>
@@ -40,4 +32,31 @@ $isDebug = (bool) $helper->getIsDebug();
         x-show="debug"
         x-text="hint"
     ></div>
+</div>
+
+<!-- Debug modal component -->
+<div
+    x-data="p2gDebugModal()"
+    x-show="show"
+    class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+    style="display: none;"
+>
+    <div class="bg-white rounded-lg p-6 w-96 max-w-full">
+        <div x-html="content"></div>
+
+        <div class="mt-4 flex justify-end gap-2">
+            <button
+                class="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded"
+                @click="close()"
+            >
+                Cancel
+            </button>
+            <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                @click="transfer()"
+            >
+                Transfer
+            </button>
+        </div>
+    </div>
 </div>

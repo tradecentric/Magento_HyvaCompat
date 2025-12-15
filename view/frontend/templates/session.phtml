@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.P2G_HYVA.restStoreCode = '<?= $block->escapeHtml($block->getRestStoreCode()) ?>';
     window.P2G_HYVA.closePostUrl = '<?= $block->escapeUrl($block->getClosePostUrl()) ?>';
     window.P2G_HYVA.apiKey = '<?= $block->escapeHtml($block->getApiKey()) ?>';
-    window.P2G_HYVA.debug = '<?= $block->escapeHtml($helper->getIsDebug()) ?>';
+    window.P2G_HYVA.debug = <?= $helper->getIsDebug() ? 'true' : 'false' ?>;
     window.P2G_HYVA.js_logging = <?= $helper->getIsJsLogging() ? 'true' : 'false' ?>;
     window.__P2G_TRACE = [];
   }).catch(err => console.error('Punchout2Go_HyvaCompat load failed:', err));

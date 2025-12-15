@@ -23,6 +23,12 @@ const log = (string, data) => {
     }
 };
 
+const notify = (type, message) => {
+    window.dispatchEvent(new CustomEvent('p2g-notify', {
+        detail: { type, message }
+    }));
+};
+
 const isJsonText = (t) => {
     log('[Punchout2Go_HyvaCompat] isJsonText()');
     if (typeof t !== 'string') return false;
@@ -352,7 +358,7 @@ export async function transferCart() {
             punchoutId = sec && sec.punchoutId;
         }
         if (!punchoutId) {
-            alert('PunchOut session is not active.');
+            notify('error', 'PunchOut session is not active.');
             return;
         }
         let payload = null;
@@ -365,13 +371,13 @@ export async function transferCart() {
             } catch {}
         }
         if (!payload) {
-            alert('Unable to fetch transfer payload.');
+            notify('error', 'Unable to fetch transfer payload.');
             return;
         }
         const returnUrl = extractReturnUrl(payload);
         const form = buildFormFromPayload(payload);
         if (!returnUrl) {
-            alert('Transfer payload did not include a redirect/return URL.');
+            notify('error', 'Transfer payload did not include a redirect/return URL.');
             return;
         }
         await closeSessionPost();
@@ -381,7 +387,7 @@ export async function transferCart() {
         }
         window.location.href = returnUrl;
     } catch (err) {
-        alert('Transfer failed: ' + (err && err.message ? err.message : 'unknown error'));
+        notify('error', 'Transfer failed: ' + (err && err.message ? err.message : 'unknown error'));
     }
 }
 

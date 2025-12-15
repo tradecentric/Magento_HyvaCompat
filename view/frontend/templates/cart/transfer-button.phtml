@@ -1,0 +1,29 @@
+<?php
+/** @var \Punchout2Go\HyvaCompat\Block\Config $block */
+?>
+<?php $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class); ?>
+
+<div class="punchout-transfer-button"
+     x-data="p2gTransferButton({ debug: <?= $helper->isDebugEnabled() ? 'true' : 'false' ?> })">
+
+    <button
+        type="button"
+        class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold
+               disabled:opacity-50 disabled:cursor-not-allowed"
+        :disabled="loading"
+        @click.prevent="handleClick()">
+
+        <span x-text="loading ? 'Transferring…' : '<?= $escaper->escapeHtml($helper->getButtonLabel()) ?>'"></span>
+    </button>
+
+    <?php if ($msg = $helper->getButtonHelp()): ?>
+        <p class="mt-2 text-sm text-gray-500">
+            <?= $escaper->escapeHtml($msg) ?>
+        </p>
+    <?php endif; ?>
+
+    <div class="text-xs mt-1 opacity-70"
+         x-show="debug"
+         x-text="hint">
+    </div>
+</div>

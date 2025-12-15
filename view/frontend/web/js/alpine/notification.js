@@ -1,15 +1,15 @@
-export function p2gNotifications() {
-    return {
-        notices: [],
-        counter: 0,
+import Alpine from 'alpinejs';
 
-        notify({ type = 'info', message = '', timeout = 5000 }) {
-            const id = ++this.counter;
-            this.notices.push({ id, type, message });
+document.addEventListener('alpine:init', () => {
+    Alpine.data('p2gNotifications', () => ({
+        messages: [],
 
-            setTimeout(() => {
-                this.notices = this.notices.filter(n => n.id !== id);
-            }, timeout);
+        add(message, type = 'info') {
+            this.messages.push({ message, type });
+        },
+
+        remove(index) {
+            this.messages.splice(index, 1);
         }
-    };
-}
+    }));
+});

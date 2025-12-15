@@ -5,9 +5,11 @@ document.addEventListener('alpine:init', () => {
         show: false,
         content: '',
 
-        open(content = '') {
-            this.content = content;
-            this.show = true;
+        init() {
+            document.addEventListener('p2g-debug-open', (event) => {
+                this.content = event.detail?.content || '';
+                this.show = true;
+            });
         },
 
         close() {

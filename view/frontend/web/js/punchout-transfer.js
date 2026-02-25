@@ -142,26 +142,28 @@ const restBaseCandidates = () => {
     return Array.from(new Set(list));
 };
 
-async function getJsonOrXml(url) {
-    log('[Punchout2Go_HyvaCompat] getJsonOrXml()', url);
-    const resp = await fetch(url, {
-        credentials: 'same-origin',
-        headers: { 'Accept': 'application/json, text/xml;q=0.9, application/xml;q=0.9, */*;q=0.8' }
-    });
-    const ct = (resp.headers.get('content-type') || '').toLowerCase();
-    const text = await resp.text();
-    if (!resp.ok) throw new Error('Transfer HTTP ' + resp.status);
-    if (ct.includes('json')) {
-        try { const json = JSON.parse(text); return { json, xml: null, ct, raw: text, url }; } catch {}
-    }
-    if (ct.includes('xml') || text.trim().startsWith('<?xml')) {
-        const xml = new DOMParser().parseFromString(text, 'text/xml');
-        return { json: null, xml, ct, raw: text, url };
-    }
-    try { const json = JSON.parse(text); return { json, xml: null, ct, raw: text, url }; } catch {}
-    return { json: null, xml: null, ct, raw: text, url };
-}
+async function getXml(url) {
+  const resp = await fetch(url, {
+    credentials: 'same-origin',
+    headers: {
+      'Accept': 'text/xml, application/xml;q=0.9, */*;q=0.8',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  });
 
+  const text = await resp.text();
+  if (!resp.ok) throw new Error(`Transfer HTTP ${resp.status}`);
+
+  const xml = new DOMParser().parseFromString(text, 'text/xml');
+
+  // DOMParser commonly reports errors via a <parsererror> element
+  const parseError = xml.getElementsByTagName('parsererror')[0];
+  if (parseError) {
+    throw new Error(`XML parse error: ${parseError.textContent?.trim() || 'Unknown parse error'}`);
+  }
+
+  return { xml, raw: text, url: resp.url || url, ct: (resp.headers.get('content-type') || '').toLowerCase() };
+}
 const extractReturnUrl = (payload) => {
     log('[Punchout2Go_HyvaCompat] extractReturnUrl()', payload);
     const { json, xml } = payload;
@@ -344,7 +346,6 @@ async function closeSessionPost() {
 }
 
 export async function transferCart() {
-    log('[Punchout2Go_HyvaCompat] transferCart()');
     try {
         let punchoutId = window.P2G_HYVA && window.P2G_HYVA.punchoutId;
         if (!punchoutId) {
@@ -360,7 +361,7 @@ export async function transferCart() {
         for (const base of bases) {
             const url = `${base}/punchout-quote/${encodeURIComponent(punchoutId)}/transfer`;
             try {
-                payload = await getJsonOrXml(url);
+                payload = await getXml(url);
                 if (payload.json || payload.xml) break;
             } catch {}
         }
@@ -384,5 +385,4 @@ export async function transferCart() {
         alert('Transfer failed: ' + (err && err.message ? err.message : 'unknown error'));
     }
 }
-
 window.transferCart = transferCart;

@@ -143,26 +143,26 @@ const restBaseCandidates = () => {
 };
 
 async function getXml(url) {
-  const resp = await fetch(url, {
-    credentials: 'same-origin',
-    headers: {
-      'Accept': 'text/xml, application/xml;q=0.9, */*;q=0.8',
-      'X-Requested-With': 'XMLHttpRequest',
-    },
-  });
+    const resp = await fetch(url, {
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'text/xml, application/xml;q=0.9, */*;q=0.8',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    });
 
-  const text = await resp.text();
-  if (!resp.ok) throw new Error(`Transfer HTTP ${resp.status}`);
+    const text = await resp.text();
+    if (!resp.ok) throw new Error(`Transfer HTTP ${resp.status}`);
 
-  const xml = new DOMParser().parseFromString(text, 'text/xml');
+    const xml = new DOMParser().parseFromString(text, 'text/xml');
 
-  // DOMParser commonly reports errors via a <parsererror> element
-  const parseError = xml.getElementsByTagName('parsererror')[0];
-  if (parseError) {
-    throw new Error(`XML parse error: ${parseError.textContent?.trim() || 'Unknown parse error'}`);
-  }
+    // DOMParser commonly reports errors via a <parsererror> element
+    const parseError = xml.getElementsByTagName('parsererror')[0];
+    if (parseError) {
+        throw new Error(`XML parse error: ${parseError.textContent?.trim() || 'Unknown parse error'}`);
+    }
 
-  return { xml, raw: text, url: resp.url || url, ct: (resp.headers.get('content-type') || '').toLowerCase() };
+    return { xml, raw: text, url: resp.url || url, ct: (resp.headers.get('content-type') || '').toLowerCase() };
 }
 const extractReturnUrl = (payload) => {
     log('[Punchout2Go_HyvaCompat] extractReturnUrl()', payload);

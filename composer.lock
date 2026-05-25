@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "tradecentric/module-punchout",
-            "version": "3.1.16",
+            "version": "3.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tradecentric/Magento_PunchOut.git",
-                "reference": "765609e77a51d6de65b110979a7c936dde8a0b27"
+                "reference": "687016bf9212231b5cb82b50b123f4f3590dff60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tradecentric/Magento_PunchOut/zipball/765609e77a51d6de65b110979a7c936dde8a0b27",
-                "reference": "765609e77a51d6de65b110979a7c936dde8a0b27",
+                "url": "https://api.github.com/repos/tradecentric/Magento_PunchOut/zipball/687016bf9212231b5cb82b50b123f4f3590dff60",
+                "reference": "687016bf9212231b5cb82b50b123f4f3590dff60",
                 "shasum": ""
             },
             "require": {
@@ -41,9 +41,9 @@
             ],
             "description": "TradeCentric PunchOut",
             "support": {
-                "source": "https://github.com/tradecentric/Magento_PunchOut/tree/3.1.16"
+                "source": "https://github.com/tradecentric/Magento_PunchOut/tree/3.1.13"
             },
-            "time": "2026-05-18T07:07:34+00:00"
+            "time": "2026-01-22T17:09:29+00:00"
         },
         {
             "name": "tradecentric/module-version",

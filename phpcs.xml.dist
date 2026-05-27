@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="TradeCentric HyvaCompat PHPCS">
+    <description>PHPCS rules for TradeCentric HyvaCompat Magento 2 module.</description>
+
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+    <arg name="warning-severity" value="0"/>
+
+    <config name="installed_paths" value="vendor/magento/magento-coding-standard,vendor/phpcsstandards/phpcsutils,vendor/magento/php-compatibility-fork"/>
+
+    <file>Block</file>
+    <file>Helper</file>
+    <file>Model</file>
+    <file>Plugin</file>
+    <file>registration.php</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/view/*</exclude-pattern>
+
+    <rule ref="Magento2"/>
+</ruleset>
+

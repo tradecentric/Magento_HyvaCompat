@@ -1,0 +1,62 @@
+name: Composer Version Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  version-check:
+    name: Warn if composer.json version not bumped
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Compare composer.json version against base branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          MARKER="<!-- composer-version-check -->"
+
+          # Read both sides defensively: a missing file, ref, or malformed JSON
+          # must yield an empty string, never a non-zero exit (which -eo pipefail
+          # would otherwise turn into a hard step failure instead of a warning).
+          HEAD_JSON=$(cat composer.json 2>/dev/null || true)
+          BASE_JSON=$(git show "${BASE_SHA}:composer.json" 2>/dev/null || true)
+          HEAD_VERSION=$(printf '%s' "$HEAD_JSON" | jq -r '.version // empty' 2>/dev/null || true)
+          BASE_VERSION=$(printf '%s' "$BASE_JSON" | jq -r '.version // empty' 2>/dev/null || true)
+
+          echo "Base (${BASE_SHA}) version: ${BASE_VERSION:-<none>}"
+          echo "Head version:                ${HEAD_VERSION:-<none>}"
+
+          if [ -z "$HEAD_VERSION" ]; then
+            echo "::warning file=composer.json::composer.json has no readable \"version\" field."
+            BODY=$(printf '%s\n\n⚠️ **`composer.json` has no readable `version` field.**' "$MARKER")
+          elif [ "$BASE_VERSION" = "$HEAD_VERSION" ]; then
+            echo "::warning file=composer.json::composer.json version ($HEAD_VERSION) was not bumped in this PR."
+            BODY=$(printf '%s\n\n⚠️ **`composer.json` version was not updated** — still `%s`.\n\nBump the `version` field before this change is tagged for release.' "$MARKER" "$HEAD_VERSION")
+          else
+            echo "composer.json version bumped: ${BASE_VERSION:-<none>} -> $HEAD_VERSION"
+            BODY=$(printf '%s\n\n✅ **`composer.json` version updated:** `%s` → `%s`.' "$MARKER" "${BASE_VERSION:-<none>}" "$HEAD_VERSION")
+          fi
+
+          # Upsert a single sticky comment so repeated pushes don't spam the PR.
+          COMMENT_ID=$(gh api "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+            --jq "map(select(.body | contains(\"$MARKER\"))) | .[0].id // empty")
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api -X PATCH "repos/${REPO}/issues/comments/${COMMENT_ID}" -f body="$BODY" >/dev/null
+          else
+            gh api -X POST "repos/${REPO}/issues/${PR_NUMBER}/comments" -f body="$BODY" >/dev/null
+          fi

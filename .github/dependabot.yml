@@ -38,6 +38,11 @@ updates:
     labels:
       - "dependencies"
       - "composer"
+    # tradecentric/* are internal packages versioned/released by us directly —
+    # ignored at the update level (not just excluded from composer-production)
+    # so the catch-all composer-other group can't pick them up either.
+    ignore:
+      - dependency-name: "tradecentric/*"
     groups:
       # Static analysis & QA tooling — low risk, group everything including majors
       php-qa-tools:
@@ -47,8 +52,7 @@ updates:
           - "dealerdirect/phpcodesniffer-composer-installer"
 
       # Production runtime dependencies — minor/patch grouped, majors as
-      # individual PRs for review. tradecentric/* modules are excluded since
-      # they're internal packages versioned/released by us directly.
+      # individual PRs for review.
       composer-production:
         dependency-type: "production"
         exclude-patterns:

@@ -4,7 +4,8 @@
 #
 # - Updates run monthly (not weekly) to keep PR noise/distractions down.
 # - Minor/patch bumps are grouped by category; majors always surface as
-#   individual, clearly-labelled PRs that require explicit review.
+#   individual, clearly-labelled PRs that require explicit review — except
+#   the low-risk php-qa-tools group, which groups majors too (see below).
 # - Security updates bypass both the schedule and the cooldown windows below,
 #   but must be enabled by a GitHub org admin (Settings > Advanced Security)
 #   before they'll open automatically — see CN-1374 for tracking.

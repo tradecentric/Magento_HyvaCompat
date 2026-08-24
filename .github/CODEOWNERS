@@ -1,8 +1,15 @@
-# This is a comment.
-# Each line is a file pattern followed by one or more owners.
-
-# These owners will be the default owners for everything in
-# the repo. Unless a later match takes precedence,
-# @global-owner1 and @global-owner2 will be requested for
-# review when someone opens a pull request.
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, specified owners will be requested for review when someone opens a pull request.
 *       @tradecentric/ui-connectors-software-engineer
+
+# CODEOWNERS file itself is owned Product Release Management
+CODEOWNERS                 @tradecentric/product-best-practices
+
+# CI/CD configuration files
+/.hadolint.yaml            @tradecentric/product-best-practices
+/rector.php                @tradecentric/product-best-practices
+/.php-cs-fixer.php         @tradecentric/product-best-practices
+/phpstan.neon              @tradecentric/product-best-practices
+/phpunit.xml               @tradecentric/product-best-practices
+/sonar-project.properties  @tradecentric/product-best-practices
+/deptrac.yaml              @tradecentric/product-best-practices

@@ -1,0 +1,70 @@
+# Dependabot configuration for this repository.
+# Conventions follow the PunchOut2Go org standard — see:
+# https://tradecentric.atlassian.net/wiki/spaces/PD/pages/4782784547/Dependency+Management+and+Periodic+Updates+Dependabot
+#
+# - Updates run monthly (not weekly) to keep PR noise/distractions down.
+# - Minor/patch bumps are grouped by category; majors always surface as
+#   individual, clearly-labelled PRs that require explicit review — except
+#   the low-risk php-qa-tools group, which groups majors too (see below).
+# - Security updates bypass both the schedule and the cooldown windows below,
+#   but must be enabled by a GitHub org admin (Settings > Advanced Security)
+#   before they'll open automatically — see CN-1374 for tracking.
+version: 2
+updates:
+  # GitHub Actions used in our CI workflows (phpcs, version-check, dora-release, etc.)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 3
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # PHP dependencies (module's own composer.json)
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 5          # minors wait 5 days (patches override to 3 days for supply chain safety)
+      semver-major-days: 60    # majors wait 60 days (community has time to document)
+      semver-patch-days: 3
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "composer"
+    # tradecentric/* are internal packages versioned/released by us directly —
+    # ignored at the update level (not just excluded from composer-production)
+    # so the catch-all composer-other group can't pick them up either.
+    ignore:
+      - dependency-name: "tradecentric/*"
+    groups:
+      # Static analysis & QA tooling — low risk, group everything including majors
+      php-qa-tools:
+        patterns:
+          - "magento/magento-coding-standard"
+          - "squizlabs/php_codesniffer"
+          - "dealerdirect/phpcodesniffer-composer-installer"
+
+      # Production runtime dependencies — minor/patch grouped, majors as
+      # individual PRs for review. (tradecentric/* is handled by the
+      # top-level `ignore` above, not by excluding it here.)
+      composer-production:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Everything else
+      composer-other:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

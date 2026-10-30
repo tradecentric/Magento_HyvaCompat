@@ -8,7 +8,7 @@ $helper = $this->helper(\Punchout2Go\Punchout\Helper\Transfer::class);
 <div class="punchout-transfer-button" x-data>
   <button type="button"
       x-on:click="transferCart()"
-      class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold">
+      class="btn btn-primary w-full">
       <span><?php echo $escaper->escapeHtml($helper->getButtonLabel()) ?></span>
   </button>
   

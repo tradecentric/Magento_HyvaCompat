@@ -7,5 +7,13 @@
         <api_key></api_key>
       </hyvacompat>
     </punchout2go_punchout>
+    <dev>
+      <js>
+        <minify_exclude>
+          <!-- punchout-transfer.js imports ./punchout-session.js by its unminified name -->
+          <punchout2go_hyvacompat>/Punchout2Go_HyvaCompat/</punchout2go_hyvacompat>
+        </minify_exclude>
+      </js>
+    </dev>
   </default>
 </config>

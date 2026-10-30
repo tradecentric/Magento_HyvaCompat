@@ -6,12 +6,13 @@ export async function loadPunchoutSection(force = false) {
     return data['punchout-session'] || null;
 }
 
-const prefetchPunchoutId = async () => {
-    try {
-        window.P2G_HYVA = window.P2G_HYVA || {};
-        const sec = await loadPunchoutSection(false);
-        if (sec && sec.punchoutId) window.P2G_HYVA.punchoutId = sec.punchoutId;
-    } catch {}
+const prefetchPunchoutId = () => {
+    window.P2G_HYVA = window.P2G_HYVA || {};
+    loadPunchoutSection(false)
+        .then((sec) => {
+            if (sec && sec.punchoutId) window.P2G_HYVA.punchoutId = sec.punchoutId;
+        })
+        .catch(() => {});
 };
 
 // session.phtml imports this module from its own DOMContentLoaded handler, so the event has usually fired already

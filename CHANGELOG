@@ -1,5 +1,13 @@
 TradeCentric - HyvaCompat
 ===========
+### 1.4.9 (2026-11-10)
+* CN-1563 show the Transfer Cart button with the theme's btn-primary style, and exclude the module JS from minification
+
+### 1.4.8 (2026-07-16)
+* CN-1160 add PHPCS pipeline
+* CN-1374 add Dependabot config and update GitHub Actions
+* add composer version check workflow, update CODEOWNERS
+
 ### 1.4.7 (2026-02-26)
 * CN-1119 address issue in punchout-transfer.js with transfer cart
 

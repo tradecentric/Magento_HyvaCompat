@@ -5,3 +5,9 @@
 CODEOWNERS export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
+
+# Development-only files: keep them out of the package clients download.
+/.github export-ignore
+/composer.lock export-ignore
+/phpcs.xml.dist export-ignore
+/phpcs-bootstrap.php export-ignore
